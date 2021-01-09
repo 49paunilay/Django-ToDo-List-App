@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <title>TODOLIST</title>
+  </head>
+  <body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+<form method="POST" action="/">
+    {% csrf_token %}
+    {{form.title}}
+    <br>
+    <input type="submit" name="Creat Task" style="margin:0% ; top: 50%;">
+</form>
+<br>
+<h1></h1>
+{% for task in tasks %}
+<div>
+    {% if task.complete == True %}
+    <strike>{{task}}</strike>
+    {% else %}
+    <span>{{task}}</span><br>
+    {% endif %}
+    <button type="button" class="btn btn-outline-primary , mx-auto"><a href="{% url 'update' task.id %}">Update</a></button>
+    <button type="button" class="btn btn-outline-primary , mx-auto"><a href="{% url 'delete' task.id %}">Delete</a></button>    
+</div>
+{% endfor %}
+
+</body>
+</html>
